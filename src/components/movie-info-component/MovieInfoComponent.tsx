@@ -8,14 +8,14 @@ import {IMovieDetails} from "@/models/IMovieDetails";
 import {getByIdMovie} from "@/services/movie_services/movies-servise";
 
 type Props = {
-  movieId: string ;
+  id: string ;
   searchParams: Promise<SearchParams>;
 };
 
-export const MovieInfoComponent=async ({movieId}:Props ) => {
-    const movieItem: IMovieDetails = await getByIdMovie(movieId);
-
-    window.scrollTo({ top: 0, behavior: "smooth" });
+export const MovieInfoComponent= async ({id}:Props ) => {
+    const movieItem: IMovieDetails = await getByIdMovie(id);
+    //
+    // window.scrollTo({ top: 0, behavior: "smooth" });
     const {
         adult,
         popularity,
@@ -23,7 +23,6 @@ export const MovieInfoComponent=async ({movieId}:Props ) => {
         budget,
         genres,
         homepage,
-        id,
         imdb_id,
         origin_country,
         original_language,
@@ -51,6 +50,8 @@ export const MovieInfoComponent=async ({movieId}:Props ) => {
                         src={`https://image.tmdb.org/t/p/original${poster_path}`}
                         alt={title}
                         className={styles.posterImage}
+                        width={500}
+                        height={400}
                     />
                 ) : (
                     <div className={styles.noPoster}>
@@ -58,6 +59,8 @@ export const MovieInfoComponent=async ({movieId}:Props ) => {
                             src='/images/placeholder.webp/'
                             alt="No poster"
                             className={styles.placeholder}
+                            width={500}
+                            height={400}
                         />
                     </div>
                 )}
@@ -105,6 +108,10 @@ export const MovieInfoComponent=async ({movieId}:Props ) => {
                                     src={`https://image.tmdb.org/t/p/original${belongs_to_collection.backdrop_path}`}
                                     alt={belongs_to_collection.name}
                                     className={styles.collectionImage}
+                                    width={500}
+                                    height={300}
+                                    sizes="(max-width: 600px) 100vw, 500px"
+                                    priority
                                 />
                             ) : (
                                 <div className={styles.collectionNoPoster}>No poster</div>
@@ -124,6 +131,8 @@ export const MovieInfoComponent=async ({movieId}:Props ) => {
                                                         src={`https://image.tmdb.org/t/p/w200${c.logo_path}`}
                                                         alt={c.name}
                                                         className={styles.productionLogo}
+                                                        width={30}
+                                                        height={30}
                                                     />
                                                 )}
                                                 <span>

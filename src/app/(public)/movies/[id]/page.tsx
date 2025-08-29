@@ -10,28 +10,28 @@ type Props = {
     searchParams:Promise<SearchParams>,
 }
 export const generateMetadata=async ({params}:Props):Promise<Metadata> => {
-    const {movieId} = await params
+    const {id} = await params
 
     return {
-        title: `Movie with id # ${movieId}`,
+        title: `Movie with id # ${id}`,
     };
 };
 
 
-export default function MovieInfoPage({ params }: Props) {
-    const { movieId } = params;
+export default async function MovieInfoPage({ params }: Props) {
+    const { id } = await params;
 
 
-    if (!movieId) {
+    if (!id) {
         throw new Error("Movie ID is missing!");
     }
 
-    console.log('Movie ID:', movieId);
+    console.log('Movie ID:', id);
 
     return (
         <div className={styles.container}>
             <GoBackButtonComponent />
-            <MovieInfoComponent movieId={movieId} />
+            <MovieInfoComponent id={id} />
             <ScrollTopButtonComponent />
         </div>
     );

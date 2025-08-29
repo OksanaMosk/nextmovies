@@ -12,18 +12,18 @@ export const getAllMovies= async (page: number): Promise<IMovieResponse> => {
         return await response.json();
     };
 
-export const getByIdMovie = async (movieId: string): Promise<IMovieDetails> => {
-    // Логування для перевірки переданого movieId
-    console.log("Fetching movie with ID:", movieId);
+export const getByIdMovie = async (id: string): Promise<IMovieDetails> => {
 
-    const response = await fetch(`${baseUrl}/movie/${movieId}?api_key=${apiKey}`);
+    console.log("Fetching movie with ID:", id);
+
+    const response = await fetch(`${baseUrl}/movie/${id}?api_key=${apiKey}`);
     if (!response.ok) {
         const errorData = await response.json();
         const errorMessage = errorData?.status_message || "Unknown error occurred";
         throw new Error(`Failed to fetch movie details: ${errorMessage}`);
     }
-    const data = await response.json();
-    return data;
+    return await response.json();
+
 };
 
 export const searchMovies = async (query: string, page: number = 1): Promise<IMovieResponse> => {
