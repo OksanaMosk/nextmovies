@@ -1,0 +1,54 @@
+.movieListContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 24px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.list {
+    margin-top: 5rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 36px;
+}
+
+.searchQueryText {
+    color: #f3f4f6;
+    font-size: 1.25rem;
+    text-align: center;
+}
+
+.queryText{
+    color: var(--color-white);
+    font-size: 2rem;
+}
+.noResults{
+    text-align: center;
+    color: var(--color-badgeId);
+    padding-top: 3rem;
+    font-size: 3rem;
+}
+
+@media (min-width: 768px) {
+    .movieListContainer {
+        width: 90%;
+
+    }
+}
+
+@media (min-width: 1280px) {
+    .movieListContainer {
+        width: 100%;
+    }
+}
+
+@media (min-width: 1536px) {
+    .movieListContainer {
+        gap: 48px;
+        width: 90%;
+        max-width: 1536px;
+    }
+}

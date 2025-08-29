@@ -1,26 +1,41 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+* {
+  box-sizing: border-box;
 }
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Raleway', sans-serif;
+  margin: 0 auto;
+  scroll-behavior: smooth;
+  background: linear-gradient(to left, black, gray);
+}
+body.dark {
+  /*background-image: url("/theme/bg-dark.webp");*/
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+}
+
+body.light {
+  /*background-image: url("/theme/bg-light.webp");*/
+  background-size: cover;
+  background-position: top left;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+}
+
+:root {
+  --color-disabled: #6b7280;
+  --color-active: #4f46e5;
+  --color-border-indigo: #6366f1;
+  --color-dark-text: #312e81;
+  --color-login:#00ACC1;
+  --color-blue-main: #bfdbfe;
+  --color-blue-text: rgba(191, 219, 254, 0.5);
+  --color-badgeId: #818cf8;
+  --color-noposter:#374151;
+  --color-white: #ffffff;
+  --color-container:#1f2937;
 }

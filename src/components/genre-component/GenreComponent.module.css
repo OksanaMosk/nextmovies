@@ -1,0 +1,25 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    width: 270px;
+}
+.label {
+    color: var(--color-blue-main);
+    font-size: 1rem;
+}
+.select {
+    display: flex;
+    align-items: center;
+    padding: 0.6rem 1rem;
+    border-radius: 1.5rem;
+    background-color: var(--color-blue-main);
+    color: var(--color-dark-text);
+    font-size: 0.875rem;
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.2s ease-in-out;
+}
+.select:focus {
+    border-color:var(--color-badgeId);
+}
