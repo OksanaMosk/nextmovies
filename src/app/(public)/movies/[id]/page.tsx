@@ -9,20 +9,19 @@ type Props = {
     params:Promise<{id:string}>,
     searchParams:Promise<SearchParams>,
 }
+export const generateMetadata=async ({params}:Props):Promise<Metadata> => {
+    const {movieId} = await params
 
-// Якщо ти не робиш асинхронні запити у generateMetadata, можна прибрати async
-export const generateMetadata = async ({ params }: Props): Metadata => {
-    const { movieId } = await params;
     return {
         title: `Movie with id # ${movieId}`,
     };
 };
 
-// Основна сторінка MovieInfoPage
+
 export default function MovieInfoPage({ params }: Props) {
     const { movieId } = params;
 
-    // Перевірка на наявність movieId (це для безпеки, якщо він не переданий)
+
     if (!movieId) {
         throw new Error("Movie ID is missing!");
     }
