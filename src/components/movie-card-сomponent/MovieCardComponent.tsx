@@ -4,7 +4,6 @@
 import { type FC, useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import moviePlaceholder from "../../../public/images/noVideo.png";
 import styles from "./MovieCardComponent.module.css"
 import { VoteAverageComponent } from "@/components/vote-average-component/VoteAverageComponent";
 import type { IMovie } from "@/models/IMovie";
@@ -64,7 +63,7 @@ export const MovieCardComponent: FC<MoviesCardProps> = ({ movie, genres,  onGenr
                 ) : (
                     <div className={styles.moviePosterPlaceholder}>
                         <Image
-                            src={moviePlaceholder}
+                            src='/images/placeholder.webp'
                             alt="No poster"
                             width={300}
                             height={450}
@@ -81,8 +80,14 @@ export const MovieCardComponent: FC<MoviesCardProps> = ({ movie, genres,  onGenr
                             setShow(true);
                         }}
                         className={styles.playButton}
-                    >
-                        <span className={styles.playButtonIcon}>▷</span>
+                    >  <Image
+                        src='/images/play.webp'
+                        alt="Play"
+                        width={80}
+                        height={80}
+                        className={styles.playButtonIcon}
+                    />
+
                     </button>
                 )}
                 {show && (

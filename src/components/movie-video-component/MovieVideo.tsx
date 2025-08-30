@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import moviePlaceholder from "../../../public/images/noVideo.png";
+
 import { LoaderComponent } from "@/components/loader-component/LoaderComponent";
 import { allVideos } from "@/services/movie_services/video_service";
 import styles from "./MovieVideo.module.css";
@@ -53,7 +53,7 @@ export const MovieVideo = ({ movieId, onCloseAction }: MovieVideoProps) => {
         return (
             <div className={styles.noTrailerContainer}>
                 <Image
-                    src={moviePlaceholder}
+                    src='/images/novideo.webp'
                     alt="No trailer"
                     width={300}
                     height={200}

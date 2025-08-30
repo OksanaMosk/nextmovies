@@ -8,9 +8,13 @@ body {
   font-family: 'Raleway', sans-serif;
   margin: 0 auto;
   scroll-behavior: smooth;
-  background: linear-gradient(to left, black, gray);
+  background-image: url("/bg-light/5.jpg");
+  background-size:cover;
+
+  background-repeat: no-repeat;
+  min-height: 100vh;
 }
-body.dark {
+body.dark {  /*background: linear-gradient(to left, black, gray);*/
   /*background-image: url("/theme/bg-dark.webp");*/
   background-size: cover;
   background-position: center;
@@ -34,8 +38,8 @@ body.light {
   --color-login:#00ACC1;
   --color-blue-main: #bfdbfe;
   --color-blue-text: rgba(191, 219, 254, 0.5);
-  --color-badgeId: #818cf8;
+  --color-badgeId: #FFD700;
   --color-noposter:#374151;
-  --color-white: #ffffff;
-  --color-container:#1f2937;
+  --color-white: #1f2937;;
+  --color-container:#ffffff;
 }

@@ -52,15 +52,17 @@ export const MovieInfoComponent= async ({id}:Props ) => {
                         className={styles.posterImage}
                         width={500}
                         height={400}
+                        sizes="(max-width: 600px) 100vw, 500px"
                     />
                 ) : (
                     <div className={styles.noPoster}>
                         <Image
-                            src='/images/placeholder.webp/'
+                            src='/images/placeholder.webp'
                             alt="No poster"
                             className={styles.placeholder}
                             width={500}
                             height={400}
+                            sizes="(max-width: 600px) 100vw, 500px"
                         />
                     </div>
                 )}
@@ -107,11 +109,10 @@ export const MovieInfoComponent= async ({id}:Props ) => {
                                 <Image
                                     src={`https://image.tmdb.org/t/p/original${belongs_to_collection.backdrop_path}`}
                                     alt={belongs_to_collection.name}
-                                    className={styles.collectionImage}
                                     width={500}
                                     height={300}
                                     sizes="(max-width: 600px) 100vw, 500px"
-                                    priority
+                                    className={styles.collectionImage}
                                 />
                             ) : (
                                 <div className={styles.collectionNoPoster}>No poster</div>

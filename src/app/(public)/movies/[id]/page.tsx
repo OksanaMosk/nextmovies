@@ -1,9 +1,9 @@
 import { GoBackButtonComponent } from "@/components/go-back-button-component/GoBackButtonComponent";
 import { ScrollTopButtonComponent } from "@/components/scroll-top-button-component/ScrollTopButtonComponent";
-import styles from "./page.module.css";
 import { MovieInfoComponent } from "@/components/movie-info-component/MovieInfoComponent";
 import { SearchParams } from "next/dist/server/request/search-params";
 import { Metadata } from "next";
+import styles from "./page.module.css";
 
 type Props = {
     params:Promise<{id:string}>,
@@ -18,7 +18,7 @@ export const generateMetadata=async ({params}:Props):Promise<Metadata> => {
 };
 
 
-export default async function MovieInfoPage({ params }: Props) {
+export default async function MovieInfoPage({ params, searchParams }: Props) {
     const { id } = await params;
 
 
@@ -31,7 +31,7 @@ export default async function MovieInfoPage({ params }: Props) {
     return (
         <div className={styles.container}>
             <GoBackButtonComponent />
-            <MovieInfoComponent id={id} />
+            <MovieInfoComponent id={id} searchParams={searchParams} />
             <ScrollTopButtonComponent />
         </div>
     );
