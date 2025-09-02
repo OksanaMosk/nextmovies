@@ -16,7 +16,7 @@
     max-width: 1536px;
     height: 80px;
     color: white;
-    position: relative; /* або fixed, якщо меню має бути завжди зверху */
+    position: relative;
     z-index: 10;
 }
 

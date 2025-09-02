@@ -17,25 +17,25 @@ Gold Frame Flow is a modern, responsive movie discovery app built with Next.js 1
 
 🔐 User authentication with email/password via Firebase
 
-
 🍪 Session management with HttpOnly cookies and Server Actions
 
 🌙 Light/dark theme switching
 
-📱 Fully responsive design with Tailwind CSS
+📱 Fully responsive design with Modules CSS, Tailwind CSS, Gsap
 
 🧰 Tech Stack
 
 Framework: Next.js 15 (App Router)
 Authentication: Firebase Authentication
 Session management: Server Actions + cookies() API
-Styling: TailWind CSS, CSS Modules
+Styling: TailWind CSS, CSS Modules, Gsap
 
 Language: TypeScript
 
 📦 Dependencies
 "dependencies": {
 "firebase": "^12.2.1",
+"gsap": "^3.13.0",
 "next": "15.5.2",
 "next-themes": "^0.4.6",
 "react": "19.1.0",
@@ -53,7 +53,7 @@ Server components access user session via Next.js cookies() API
 🚀 How to Run Locally
 
 Clone the repository:
-git clone https://github.com/your-username/gold-frame-flow.git
+git clone https://github.com/OksanaMosk/nextmovies.git
 cd gold-frame-flow
 
 Install dependencies:
@@ -68,8 +68,9 @@ Theme is managed via Next Themes
 
 👩‍💻 Author
 Oksana Moskalova
-Frontend Developer passionate about clean UI and smooth UX
+Developer passionate about clean UI and smooth UX
 🔗 GitHub
+https://github.com/OksanaMosk
 
 💡 Additional Notes
 

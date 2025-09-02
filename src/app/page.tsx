@@ -1,9 +1,8 @@
 
 import MostPopularWrapper from "@/components/most-popular-wrapper/MostPopularWrapperComponent";
-import {IMovie} from "@/models/IMovie";
 import {getPopularMovies} from "@/services/movie_services/movies-servise";
 import GsapGalleryComponent from "@/components/gsap-gallery-component/GsapGalleryComponent";
-
+import {IMovie} from "@/models/IMovie";
 
     export default async function Home() {
         const response = await getPopularMovies()

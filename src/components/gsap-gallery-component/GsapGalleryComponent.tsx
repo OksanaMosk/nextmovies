@@ -3,9 +3,9 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { Observer } from "gsap/Observer";
-import styles from "./GsapGalleryComponent.module.css";
 import Image from "next/image";
 import { IMovie } from "@/models/IMovie";
+import styles from "./GsapGalleryComponent.module.css";
 
 gsap.registerPlugin(Observer);
 
@@ -14,26 +14,30 @@ interface Props {
 }
 
 export default function GsapGalleryComponent({ movies }: Props) {
-    const sectionRefs = useRef<HTMLElement[]>([]);
-    const imageRefs = useRef<HTMLImageElement[]>([]);
-    const slideImageRefs = useRef<HTMLImageElement[]>([]);
-    const outerWrappers = useRef<HTMLDivElement[]>([]);
-    const innerWrappers = useRef<HTMLDivElement[]>([]);
+
+    function useArrayRefs<T extends HTMLElement>(length: number) {
+        const refs = useRef<(T | null)[]>([]);
+
+        const setRef = useCallback((index: number) => (el: T | null) => {
+            refs.current[index] = el;
+        }, []);
+
+        return [refs, setRef] as const;
+    }
+
+    const [sectionRefs, setSectionRef] = useArrayRefs<HTMLElement>(movies.length);
+    const [outerWrapperRefs, setOuterWrapperRef] = useArrayRefs<HTMLDivElement>(movies.length);
+    const [innerWrapperRefs, setInnerWrapperRef] = useArrayRefs<HTMLDivElement>(movies.length);
+    const [slideImageRefs, setSlideImageRef] = useArrayRefs<HTMLImageElement>(movies.length);
+    const [imageRefs, setImageRef] = useArrayRefs<HTMLImageElement>(movies.length);
+
     const countRef = useRef<HTMLSpanElement>(null);
     const galleryRef = useRef<HTMLDivElement>(null);
 
     const [currentIndex, setCurrentIndex] = useState(0);
     const [animating, setAnimating] = useState(false);
-    const wrap = gsap.utils.wrap(0, movies.length);
 
-    const setRef = <T extends HTMLElement>(
-        refArray: React.MutableRefObject<T[]>,
-        index: number
-    ) => {
-        return (el: T | null) => {
-            if (el) refArray.current[index] = el;
-        };
-    };
+    const wrap = gsap.utils.wrap(0, movies.length);
 
     const gotoSection = useCallback(
         (index: number, direction: number) => {
@@ -45,18 +49,18 @@ export default function GsapGalleryComponent({ movies }: Props) {
                 onComplete: () => {
                     setAnimating(false);
 
-                    // ✅ Повернути всі попередні великі картинки назад
                     imageRefs.current.forEach((img, i) => {
                         if (i !== index) {
                             gsap.set(img, {
                                 xPercent: 0,
                                 autoAlpha: 0,
-                                zIndex: 0
+                                zIndex: 0,
                             });
                         }
                     });
 
                     sectionRefs.current.forEach((sec, i) => {
+                        if (!sec) return;
                         const h = sec.querySelector(`.${styles.slideheading}`) as HTMLElement;
                         if (i !== index && h) {
                             gsap.set(h, { autoAlpha: 0 });
@@ -115,13 +119,13 @@ export default function GsapGalleryComponent({ movies }: Props) {
                     0.3
                 )
                 .fromTo(
-                    outerWrappers.current[index],
+                    outerWrapperRefs.current[index],
                     { xPercent: 100 * direction },
                     { xPercent: 0 },
                     0.3
                 )
                 .fromTo(
-                    innerWrappers.current[index],
+                    innerWrapperRefs.current[index],
                     { xPercent: -100 * direction },
                     { xPercent: 0 },
                     0.3
@@ -135,28 +139,31 @@ export default function GsapGalleryComponent({ movies }: Props) {
                     0.3
                 );
 
-            gsap.set(countRef.current, { textContent: String(index + 1) });
+            if (countRef.current) {
+                gsap.set(countRef.current, { textContent: String(index + 1) });
+            }
+
             setCurrentIndex(index);
         },
-        [currentIndex, wrap]
+        [currentIndex, wrap, sectionRefs, outerWrapperRefs, innerWrapperRefs, slideImageRefs, imageRefs]
     );
 
     useEffect(() => {
         if (!galleryRef.current) return;
 
-        gsap.set(outerWrappers.current, { xPercent: 100 });
-        gsap.set(innerWrappers.current, { xPercent: -100 });
-        gsap.set(outerWrappers.current[0], { xPercent: 0 });
-        gsap.set(innerWrappers.current[0], { xPercent: 0 });
-
+        gsap.set(outerWrapperRefs.current, { xPercent: 100 });
+        gsap.set(innerWrapperRefs.current, { xPercent: -100 });
+        gsap.set(outerWrapperRefs.current[0], { xPercent: 0 });
+        gsap.set(innerWrapperRefs.current[0], { xPercent: 0 });
         const scrollObserver = Observer.create({
             target: galleryRef.current,
             type: "wheel,touch,pointer",
-            preventDefault: (event) => {
-                const target = event.target as HTMLElement;
-                // 🐞 DEBUG: подивитись, хто викликає подію
-                console.log('Scroll event target:', event.target);
-                const shouldIgnore = (
+            preventDefault: true,
+
+            onWheel: (self) => {
+                const originalEvent = self.event as WheelEvent | PointerEvent | TouchEvent;
+                const target = originalEvent.target as HTMLElement;
+                const shouldIgnore =
                     target.closest("a") ||
                     target.closest("button") ||
                     target.closest("nav") ||
@@ -164,18 +171,23 @@ export default function GsapGalleryComponent({ movies }: Props) {
                     target.closest("textarea") ||
                     target.closest(".burger") ||
                     target.closest(".menuList") ||
-                    target.closest(".rightBlock")
-                );
+                    target.closest(".rightBlock");
 
-
-                return !shouldIgnore;
+                if (shouldIgnore) {
+                    originalEvent.preventDefault = () => {};
+                }
             },
-            allowClicks: true,
-            wheelSpeed: -1,
-            tolerance: 10,
-            onUp: () => !animating && gotoSection(currentIndex + 1, +1),
-            onDown: () => !animating && gotoSection(currentIndex - 1, -1),
+
+            onDown: () => {
+                if (!animating) gotoSection(currentIndex + 1, +1);
+            },
+
+            onUp: () => {
+                if (!animating) gotoSection(currentIndex - 1, -1);
+            },
         });
+
+
         const handleKey = (e: KeyboardEvent) => {
             if (animating) return;
             if (["ArrowUp", "ArrowLeft"].includes(e.code)) {
@@ -192,27 +204,27 @@ export default function GsapGalleryComponent({ movies }: Props) {
             scrollObserver.kill();
             document.removeEventListener("keydown", handleKey);
         };
-    }, [animating, currentIndex, gotoSection]);
+    }, [animating, currentIndex, gotoSection, outerWrapperRefs, innerWrapperRefs]);
 
     return (
         <div ref={galleryRef} className={styles.containerTop}>
             {movies.map((movie, i) => (
                 <section
                     key={movie.id}
-                    ref={setRef(sectionRefs, i)}
+                    ref={setSectionRef(i)}
                     className={styles.slide}
                 >
-                    <div ref={setRef(outerWrappers, i)} className={styles.slideouter}>
-                        <div ref={setRef(innerWrappers, i)} className={styles.slideinner}>
-                            <div className={styles.slidecontent}>
-                                <div className={styles.slidecontainer}>
+                    <div ref={setOuterWrapperRef(i)} className={styles.slideOuter}>
+                        <div ref={setInnerWrapperRef(i)} className={styles.slideInner}>
+                            <div className={styles.slideContent}>
+                                <div className={styles.slideContainer}>
                                     <h2 className={`slideheading ${styles.slideheading}`}>
                                         {movie.title}
                                     </h2>
-                                    <figure className={styles.slideimgcont}>
+                                    <figure className={styles.slideImgCont}>
                                         <Image
-                                            ref={setRef(slideImageRefs, i)}
-                                            className={styles.slideimg}
+                                            ref={setSlideImageRef(i)}
+                                            className={styles.slideImg}
                                             src={`https://image.tmdb.org/t/p/w342${movie.poster_path}`}
                                             alt={movie.title}
                                             width={342}
@@ -228,17 +240,17 @@ export default function GsapGalleryComponent({ movies }: Props) {
             ))}
 
             <section className={styles.overlay}>
-                <div className={styles.overlaycontent}>
-                    <p className={`count ${styles.overlaycount}`}>
-            <span ref={countRef} className={`count ${styles.count}`}>
-              1
-            </span>
+                <div className={styles.overlayContent}>
+                    <p className={`count ${styles.overlayCount}`}>
+                        <span ref={countRef} className={`count ${styles.count}`}>
+                            1
+                        </span>
                     </p>
-                    <figure className={styles.overlayimgcont}>
+                    <figure className={styles.overlayImgCont}>
                         {movies.map((movie, i) => (
                             <Image
                                 key={movie.id}
-                                ref={setRef(imageRefs, i)}
+                                ref={setImageRef(i)}
                                 className={styles.image}
                                 src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
                                 alt={movie.title}

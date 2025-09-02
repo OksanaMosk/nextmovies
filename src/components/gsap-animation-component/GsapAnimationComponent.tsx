@@ -27,7 +27,6 @@ export default function GsapAnimationComponent({ onAnimationEnd }: Props) {
 
     const [positions, setPositions] = useState<{ x: number; y: number }[]>([]);
 
-    // ✅ Функція розрахунку позицій
     const calculatePositions = () => {
         const centerX = window.innerWidth / 2;
         const containerHeight = window.innerHeight * 0.68;
@@ -54,14 +53,12 @@ export default function GsapAnimationComponent({ onAnimationEnd }: Props) {
         setPositions(positionsArr);
     };
 
-    // ✅ useEffect для ініціалізації та resize
     useEffect(() => {
         calculatePositions();
         window.addEventListener("resize", calculatePositions);
         return () => window.removeEventListener("resize", calculatePositions);
     }, []);
 
-    // ✅ Оновлення центрів DOM-елементів
     const updateCellPositions = () => {
         cellsRef.current.forEach((cell) => {
             const rect = cell.getBoundingClientRect();
@@ -72,15 +69,12 @@ export default function GsapAnimationComponent({ onAnimationEnd }: Props) {
         });
     };
 
-    // ✅ Ефект оновлення центрів після оновлення позицій
     useEffect(() => {
-        // Зачекати один кадр, щоб DOM-елементи точно промалювались
         requestAnimationFrame(() => {
             updateCellPositions();
         });
     }, [positions]);
 
-    // ✅ Реакція на рух миші
     const handlePointerMove = useCallback((e: PointerEvent) => {
         if (!interactionActiveRef.current) return;
 
@@ -113,7 +107,7 @@ export default function GsapAnimationComponent({ onAnimationEnd }: Props) {
         });
     }, []);
 
-    // ✅ Анімація розкидання
+
     const scatterCells = useCallback(() => {
         if (clickedRef.current) return;
         clickedRef.current = true;
@@ -137,7 +131,6 @@ export default function GsapAnimationComponent({ onAnimationEnd }: Props) {
         });
     }, [onAnimationEnd]);
 
-    // ✅ Ініціалізація клітинок
     useEffect(() => {
         if (!containerRef.current) return;
 
