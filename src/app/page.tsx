@@ -1,7 +1,8 @@
-import MostPopularMoviesGallery from "@/components/most-popular-gallery-component/MostPopularGalleryComponent";
+
 import MostPopularWrapper from "@/components/most-popular-wrapper/MostPopularWrapperComponent";
 import {IMovie} from "@/models/IMovie";
 import {getPopularMovies} from "@/services/movie_services/movies-servise";
+import GsapGalleryComponent from "@/components/gsap-gallery-component/GsapGalleryComponent";
 
 
     export default async function Home() {
@@ -10,7 +11,7 @@ import {getPopularMovies} from "@/services/movie_services/movies-servise";
         return (
             <div className="flex flex-col justify-center items-center h-[84%] w-full">
                 <MostPopularWrapper>
-                    <MostPopularMoviesGallery movies={top10} />
+                    <GsapGalleryComponent  movies={top10}/>
                 </MostPopularWrapper>
             </div>
         );

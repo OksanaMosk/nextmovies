@@ -2,8 +2,13 @@ import type { Metadata } from "next";
 import React from "react";
 import MenuComponent from "@/components/menu-component/MenuComponent";
 import {ThemeProvider} from "next-themes";
+import { Open_Sans } from "next/font/google";
 import "./globals.css";
 
+const openSans = Open_Sans({
+    subsets: ["latin"],
+    weight: ["400", "600", "700"],
+});
 
 export const metadata: Metadata = {
     title: "Gold Frame Flow",
@@ -23,7 +28,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en" suppressHydrationWarning>
-        <body>
+        <body className={openSans.className}>
         <ThemeProvider
             attribute="class"
             defaultTheme="dark"

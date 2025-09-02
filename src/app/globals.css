@@ -12,7 +12,9 @@
 }
 
 body {
-  font-family: 'Raleway', sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
   margin: 0 auto;
   scroll-behavior: smooth;
   background-size: cover;
@@ -93,9 +95,7 @@ html.light {
   .slideheading{
     color: var(--color-container);
   }
-  /*.count{*/
-  /*  color: var(--color-container);*/
-  /*}*/
+
 
   .cell{
    background:black;
