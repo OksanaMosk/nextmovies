@@ -12,7 +12,7 @@ export const VoteAverageComponent = ({ vote_average }: PercentageLoaderProps) =>
     <div
     className={styles.progress}
     style={{
-        background: `conic-gradient(#7c86ff ${percentage}%, #ffffff ${percentage}%)`,
+        background: `conic-gradient(#FFD700 ${percentage}%, #1f2937 ${percentage}%)`,
     }}
     />
     <div className={styles.inner} />

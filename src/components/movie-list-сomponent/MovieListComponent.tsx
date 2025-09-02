@@ -1,10 +1,10 @@
 "use client";
 
-import { IMovie } from "@/models/IMovie";
-import { IGenre } from "@/models/IGenre";
 import { MovieCardComponent } from "@/components/movie-card-сomponent/MovieCardComponent";
 import { PaginationComponent } from "@/components/pagination-component/PaginationComponent";
 import styles from "./MovieListComponent.module.css";
+import { IMovie } from "@/models/IMovie";
+import { IGenre } from "@/models/IGenre";
 
 type Props = {
     genres: IGenre[];
@@ -28,7 +28,7 @@ export const MovieListComponent = ({
         const params = new URLSearchParams(window.location.search);
         params.set("pg", newPage.toString());
         window.history.pushState({}, "", `?${params.toString()}`);
-        window.dispatchEvent(new Event("popstate")); // оновлення сторінки
+        window.dispatchEvent(new Event("popstate"));
     };
 
     const getOffsetClass = (i: number) => {
@@ -37,7 +37,7 @@ export const MovieListComponent = ({
     };
 
     if (movies.length === 0) {
-        return <p className={styles.noResults}>No results found.</p>;
+        return <p className={`noResults ${styles.noResults}`}>No results found.</p>;
     }
 
     return (

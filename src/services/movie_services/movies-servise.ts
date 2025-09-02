@@ -13,9 +13,6 @@ export const getAllMovies= async (page: number): Promise<IMovieResponse> => {
     };
 
 export const getByIdMovie = async (id: string): Promise<IMovieDetails> => {
-
-    console.log("Fetching movie with ID:", id);
-
     const response = await fetch(`${baseUrl}/movie/${id}?api_key=${apiKey}`);
     if (!response.ok) {
         const errorData = await response.json();
@@ -48,5 +45,18 @@ export const getFilteredMovies = async (
     if (!response.ok) {
         throw new Error("Failed to fetch movies");
     }
+    return await response.json();
+};
+
+
+export const getPopularMovies = async (page: number = 1): Promise<IMovieResponse> => {
+    const response = await fetch(`${baseUrl}/movie/popular?api_key=${apiKey}&page=${page}`, {
+        cache: "no-store"
+    });
+
+    if (!response.ok) {
+        throw new Error("Failed to fetch popular movies");
+    }
+
     return await response.json();
 };

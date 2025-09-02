@@ -1,6 +1,8 @@
+"use client"
+
 import styles from "./LoaderComponent.module.css"
 
-export const LoaderComponent = () => {
+export const LoaderComponent = ({ fillColor = "#FFD700", centerColor = "#1f2937" }) => {
     return (
         <div className={styles.container}>
             <svg width="200" height="200" viewBox="0 0 200 200">
@@ -32,8 +34,9 @@ export const LoaderComponent = () => {
                                 cx={x}
                                 cy={y}
                                 r="14"
-                                fill="oklch(88.2% 0.059 254.128)"
+                                fill={fillColor}
                                 filter="url(#glow)"
+                                className="loader"
                             />
                         );
                     })}
@@ -41,8 +44,10 @@ export const LoaderComponent = () => {
 
                 <circle
                     r="14"
-                    fill="#00FFFF"
+
+                    fill={centerColor }
                     filter="url(#glow)"
+                    className="loader-run"
                 >
                     <animate
                         attributeName="cx"

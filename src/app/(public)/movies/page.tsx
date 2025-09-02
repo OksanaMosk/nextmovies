@@ -15,11 +15,11 @@ type Props = {
     }>;
 };
 
-export default async function MoviesPage({searchParams }: Props) {
+export default async function MoviesPage({searchParams}: Props) {
 
 
     const resolvedSearchParams = await searchParams;
-    const { sort = "", genre, query = "", pg = "1" } = resolvedSearchParams;
+    const {sort = "", genre, query = "", pg = "1"} = resolvedSearchParams;
 
 
     const page = Number(pg) || 1;

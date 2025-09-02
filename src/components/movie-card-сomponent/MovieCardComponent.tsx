@@ -1,15 +1,14 @@
 
 "use client";
 
-import { type FC, useState } from "react";
 import { useRouter } from "next/navigation";
+import { type FC, useState } from "react";
+import { VoteAverageComponent } from "@/components/vote-average-component/VoteAverageComponent";
+import {MovieVideo} from "@/components/movie-video-component/MovieVideo";
 import Image from "next/image";
 import styles from "./MovieCardComponent.module.css"
-import { VoteAverageComponent } from "@/components/vote-average-component/VoteAverageComponent";
 import type { IMovie } from "@/models/IMovie";
 import type { IGenre } from "@/models/IGenre";
-import {MovieVideo} from "@/components/movie-video-component/MovieVideo";
-
 
 type MoviesCardProps = {
     movie: IMovie;
@@ -41,6 +40,13 @@ export const MovieCardComponent: FC<MoviesCardProps> = ({ movie, genres,  onGenr
         return `${day}-${month}-${year}`;
     };
 
+
+    const truncateTitle = (title: string, maxLength: number = 45): string => {
+        if (title.length > maxLength) {
+            return title.slice(0, maxLength) + '...';
+        }
+        return title;
+    };
     return (
         <div
             className={styles.movieCardWrapper}
@@ -49,8 +55,9 @@ export const MovieCardComponent: FC<MoviesCardProps> = ({ movie, genres,  onGenr
                 setHovered(false);
                 setShow(false);
             }}
-        >
-            <div onClick={handleClick} className={styles.movieItem}>
+        >    <VoteAverageComponent vote_average={movie.vote_average} />
+            <div onClick={handleClick} className={`movieItem ${styles.movieItem}`}>
+
                 {movie.poster_path ? (
                     <Image
                         src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
@@ -67,6 +74,7 @@ export const MovieCardComponent: FC<MoviesCardProps> = ({ movie, genres,  onGenr
                             alt="No poster"
                             width={300}
                             height={450}
+                            loading="lazy"
                             className={styles.noImage}
                         />
                         <span className={styles.noImageText}>No POSTER available</span>
@@ -96,9 +104,11 @@ export const MovieCardComponent: FC<MoviesCardProps> = ({ movie, genres,  onGenr
                     </div>
                 )}
             </div>
-            <div className={styles.movieInfoWrapper}>
+            <div className={`movieInfoWrapper ${styles.movieInfoWrapper}`}>
                 <div className={styles.movieInfo}>
-                    <h1 className={styles.movieTitle}>{movie.original_title}</h1>
+                    <h1 className={`movieTitle ${styles.movieTitle}`}>
+                        {truncateTitle(movie.original_title)}
+                    </h1>
                     <div className="flex gap-2">
                         {movie.release_date ? (
                             <p>
@@ -134,11 +144,10 @@ export const MovieCardComponent: FC<MoviesCardProps> = ({ movie, genres,  onGenr
                                 );
                             })
                         ) : (
-                            <span className="text-blue-200">No genres</span>
+                            <span className="text-[#FFD700]">No genres</span>
                         )}
                     </div>
                 </div>
-                <VoteAverageComponent vote_average={movie.vote_average} />
             </div>
         </div>
     );

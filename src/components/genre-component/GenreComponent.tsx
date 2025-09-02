@@ -1,18 +1,14 @@
 "use client";
 
 import React, { FC } from "react";
-import styles from "./GenreComponent.module.css";
-
 import {IGenre} from "@/models/IGenre";
-
-
-
+import styles from "./GenreComponent.module.css";
 
 
 type GenreProps = {
     onChangeAction: (genreId: number | null) => void;
     value?: number | null;
-    genres: IGenre[]; // ⬅️ новий пропс
+    genres: IGenre[];
 };
 
 export const GenreComponent: FC<GenreProps> = ({ onChangeAction, value, genres }) => {
@@ -23,14 +19,14 @@ export const GenreComponent: FC<GenreProps> = ({ onChangeAction, value, genres }
 
     return (
         <div className={styles.container}>
-            <label htmlFor="genreSelect" className={styles.label}>
+            <label htmlFor="genreSelect" className={`sort-label ${styles.label}`}>
                 Choose genre
             </label>
             <select
                 id="genreSelect"
                 value={value ?? ""}
                 onChange={handleChange}
-                className={styles.select}
+                className={`sort-select ${styles.select}`}
             >
                 <option value="">All genres</option>
                 {genres.map((genre) => (

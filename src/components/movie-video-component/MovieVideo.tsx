@@ -1,12 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
-
 import { LoaderComponent } from "@/components/loader-component/LoaderComponent";
 import { allVideos } from "@/services/movie_services/video_service";
 import styles from "./MovieVideo.module.css";
 import {IResults} from "@/models/IVideo";
+import Image from "next/image";
 
 type MovieVideoProps = {
     movieId: number;
@@ -38,7 +37,7 @@ export const MovieVideo = ({ movieId, onCloseAction }: MovieVideoProps) => {
             }
         };
 
-        fetchTrailer();
+        fetchTrailer().catch(console.error);
     }, [movieId]);
 
     if (loading) {

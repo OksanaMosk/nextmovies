@@ -1,0 +1,184 @@
+/* Основний контейнер */
+.containerTop {
+    box-sizing: border-box;
+    user-select: none;
+    overflow: hidden;
+    margin: 100px auto;
+    padding: 0;
+    height: 84vh;
+    font-family: "Sora", sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content:flex-start;
+    flex-direction: column;
+    /*background: red;*/
+}
+
+
+/* Слайд (один фільм) */
+.slide {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    visibility: hidden;
+}
+
+.slideouter,
+.slideinner {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.slidecontent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Контейнер всередині слайду */
+.slidecontainer {
+    position: relative;
+    width: 100%;
+object-fit: contain;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+    gap: 0;
+    padding: 0 1rem;
+    height: 50vh;
+    margin-bottom: 10vh;
+}
+
+/* Заголовок */
+.slideheading {
+    --width: 200;
+    display: block;
+    text-align: left;
+    font-size: clamp(1rem, 6vw, 2.5rem);
+    font-weight: 700;
+    font-variation-settings: "wdth" var(--width);
+    margin: 0;
+    padding: 0;
+    color:var(--color-badgeId);
+    mix-blend-mode: difference;
+    grid-area: 1 / 1 / 3 / 6;
+    align-self: end;
+    text-transform: unset;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transform: translateY(22vh);
+    opacity: 0;
+}
+
+/* Контейнер картинки */
+.slideimgcont {
+    grid-area: 3 / 6 / 8 / 11;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Картинка */
+.slideimg {
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 12px;
+    display: block;
+}
+
+
+.overlay {
+    position: fixed;
+    height: calc(100vh - 15vh);
+    top: 15vh;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    z-index: 2;
+
+}
+
+/* Контент оверлею */
+.overlaycontent {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    height: 84vh;
+    margin-bottom: 10vh;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+    gap: 0;
+
+}
+
+/* Контейнер зображень в оверлеї */
+.overlayimgcont {
+    position: relative;
+    overflow: hidden;
+    grid-area: 5 / 4 / 10 / 11;
+}
+
+.overlayimgcont img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+
+}
+
+/* Лічильник */
+.overlaycount {
+    grid-area: 3 / 10 / 4 / 11;
+    font-size: clamp(2rem, 2.5vw, 3rem);
+    text-align: right;
+    margin: 0;
+    padding: 0;
+    border-bottom: 5px var(--color-active) solid;
+}
+.count{
+       color: var(--color-badgeId);
+   }
+
+/* Медіа для більших екранів */
+@media screen and (min-width: 900px) {
+    .overlaycontent,
+    .slidecontainer {
+        padding: 0 3rem;
+        margin-top: 10vh;
+        width: 80%;
+        height: 84%;
+        object-fit: cover;
+    }
+
+    .overlayimgcont {
+        grid-area: 5 / 4 / 10 / 11;
+    }
+
+    .overlaycount {
+        grid-area: 3 / 10 / 4 / 11;
+    }
+
+    .slideimgcont {
+        margin-top: 0;
+        grid-area: 3 / 6 / 8 / 11;
+    }
+
+    .slideheading {
+        grid-area: 1 / 1 / 3 / 6;
+    }
+}

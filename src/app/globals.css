@@ -1,45 +1,129 @@
 @import "tailwindcss";
 
-
-* {
-  box-sizing: border-box;
+:root {
+  --color-disabled: #6b7280;
+  --color-active: #FFD700;
+  --color-border: #947e07;
+  --color-text: #f2e499;
+  --color-badgeId: #bda008;
+  --color-noposter: #374151;
+  --color-white: #ffffff;
+  --color-container: #1f2937;
 }
+
 body {
   font-family: 'Raleway', sans-serif;
   margin: 0 auto;
   scroll-behavior: smooth;
-  background-image: url("/bg-light/5.jpg");
-  background-size:cover;
-
-  background-repeat: no-repeat;
-  min-height: 100vh;
-}
-body.dark {  /*background: linear-gradient(to left, black, gray);*/
-  /*background-image: url("/theme/bg-dark.webp");*/
   background-size: cover;
-  background-position: center;
   background-repeat: no-repeat;
   min-height: 100vh;
+  background-color: white;
 }
 
-body.light {
-  /*background-image: url("/theme/bg-light.webp");*/
-  background-size: cover;
-  background-position: top left;
-  background-repeat: no-repeat;
-  min-height: 100vh;
+html.light {
+
+  body {
+    background:
+            url("/background/light.png") no-repeat top right / auto,
+            linear-gradient(to bottom left, black, #ebe68f);
+  }
+
+  .burgerMenu {
+    background:
+            url("/background/light.png") no-repeat bottom right / auto,
+            linear-gradient(to bottom left, black, #ebe68f);
+  }
+
+  .search-input,
+  .sort-select,
+  .movieInfoWrapper {
+    background-color: var(--color-white);
+  }
+
+  .search-button,
+  .search-input,
+  .noResults,
+  .search-input::placeholder {
+    color: var(--color-container);
+  }
+
+  .search-button:focus,
+  .search-button:active,
+  .search-button:hover,
+  .movieTitle {
+    color: var(--color-badgeId);
+  }
+
+  .search-input:focus {
+    opacity: 0.7;
+  }
+
+  .sort-label,
+  .search-clearButton {
+    color: var(--color-white);
+  }
+
+
+  .movieItem {
+    box-shadow: none;
+    border-bottom: 1px solid var(--color-active);
+  }
+
+
+  .loader {
+    fill: var(--color-container);
+  }
+
+  .loader-run {
+    fill: var(--color-active);
+  }
+
+
+  .auth {
+    background-color: black;
+    opacity: 0.8;
+  }
+
+
+  .burgerUserLogoutBtn {
+    color: black;
+  }
+
+  .slideheading{
+    color: var(--color-container);
+  }
+  /*.count{*/
+  /*  color: var(--color-container);*/
+  /*}*/
+
+  .cell{
+   background:black;
+  }
 }
 
-:root {
-  --color-disabled: #6b7280;
-  --color-active: #4f46e5;
-  --color-border-indigo: #6366f1;
-  --color-dark-text: #312e81;
-  --color-login:#00ACC1;
-  --color-blue-main: #bfdbfe;
-  --color-blue-text: rgba(191, 219, 254, 0.5);
-  --color-badgeId: #FFD700;
-  --color-noposter:#374151;
-  --color-white: #1f2937;;
-  --color-container:#ffffff;
+html.dark {
+
+  body,
+  .burgerMenu {
+    background-image: url("/background/dark.jpg");
+  }
+
+  .mainTitle{
+    background: linear-gradient( var(--color-active), var(--color-badgeId));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .cell{
+    background:var(--color-active);
+  }
+}
+::-webkit-scrollbar {
+  display: none;
+}
+figure {
+  margin: 0;
+  overflow: hidden;
+
 }

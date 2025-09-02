@@ -13,7 +13,6 @@ type PaginationProps = {
 
 export const PaginationComponent = ({
                                         totalPages,
-                                        // onPageChangeAction,
                                     }: PaginationProps) => {
     const searchParams = useSearchParams();
     const router = useRouter();

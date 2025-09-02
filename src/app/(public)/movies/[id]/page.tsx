@@ -1,15 +1,15 @@
-import { GoBackButtonComponent } from "@/components/go-back-button-component/GoBackButtonComponent";
-import { ScrollTopButtonComponent } from "@/components/scroll-top-button-component/ScrollTopButtonComponent";
-import { MovieInfoComponent } from "@/components/movie-info-component/MovieInfoComponent";
-import { SearchParams } from "next/dist/server/request/search-params";
-import { Metadata } from "next";
+import {GoBackButtonComponent} from "@/components/go-back-button-component/GoBackButtonComponent";
+import {ScrollTopButtonComponent} from "@/components/scroll-top-button-component/ScrollTopButtonComponent";
+import {MovieInfoComponent} from "@/components/movie-info-component/MovieInfoComponent";
+import {SearchParams} from "next/dist/server/request/search-params";
+import {Metadata} from "next";
 import styles from "./page.module.css";
 
 type Props = {
-    params:Promise<{id:string}>,
-    searchParams:Promise<SearchParams>,
+    params: Promise<{ id: string }>,
+    searchParams: Promise<SearchParams>,
 }
-export const generateMetadata=async ({params}:Props):Promise<Metadata> => {
+export const generateMetadata = async ({params}: Props): Promise<Metadata> => {
     const {id} = await params
 
     return {
@@ -18,8 +18,8 @@ export const generateMetadata=async ({params}:Props):Promise<Metadata> => {
 };
 
 
-export default async function MovieInfoPage({ params, searchParams }: Props) {
-    const { id } = await params;
+export default async function MovieInfoPage({params, searchParams}: Props) {
+    const {id} = await params;
 
 
     if (!id) {
@@ -30,9 +30,9 @@ export default async function MovieInfoPage({ params, searchParams }: Props) {
 
     return (
         <div className={styles.container}>
-            <GoBackButtonComponent />
-            <MovieInfoComponent id={id} searchParams={searchParams} />
-            <ScrollTopButtonComponent />
+            <GoBackButtonComponent/>
+            <MovieInfoComponent id={id} searchParams={searchParams}/>
+            <ScrollTopButtonComponent/>
         </div>
     );
 }

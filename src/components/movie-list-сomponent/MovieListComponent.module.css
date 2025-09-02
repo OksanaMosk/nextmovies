@@ -27,7 +27,7 @@
 }
 .noResults{
     text-align: center;
-    color: var(--color-badgeId);
+    color: var(--color-active);
     padding-top: 3rem;
     font-size: 3rem;
 }

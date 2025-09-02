@@ -1,3 +1,5 @@
+'use client';
+
 import * as React from "react";
 import styles from "./SortComponent.module.css";
 
@@ -28,9 +30,8 @@ export const SortComponent = ({ onChangeAction, value }: Props) => {
 
     return (
         <div className={styles.container}>
-            <label
+            <label className={`sort-label ${styles.label}`}
                 htmlFor="sortSelect"
-                className={styles.label}
             >
                 Sort by
             </label>
@@ -39,7 +40,7 @@ export const SortComponent = ({ onChangeAction, value }: Props) => {
                 id="sortSelect"
                 value={value}
                 onChange={handleChange}
-                className={styles.select}
+                className={`sort-select ${styles.select}`}
             >
                 {sortOptions.map((option) => (
                     <option key={option.value} value={option.value}>

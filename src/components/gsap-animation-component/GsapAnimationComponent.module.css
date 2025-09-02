@@ -1,0 +1,6 @@
+.gsapCell{
+    margin:0 auto;
+}
+ .cell{
+   background:var(--color-active);
+  }

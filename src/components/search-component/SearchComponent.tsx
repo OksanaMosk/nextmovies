@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
+import React, { useState, useEffect } from "react";
 import styles from "./SearchComponent.module.css";
 
 export const SearchComponent = () => {
@@ -36,27 +36,29 @@ export const SearchComponent = () => {
 
     return (
         <div className={styles.container}>
-            <label htmlFor="movieSearch" className={styles.label}>
+            <label htmlFor="movieSearch" className={`sort-label ${styles.label}`}>
                 Search for movies
             </label>
             <form onSubmit={handleSearch} className={styles.form}>
-                <input
-                    id="movieSearch"
-                    type="text"
-                    value={searchText}
-                    onChange={(e) => setSearchText(e.target.value)}
-                    placeholder="Find..."
-                    className={styles.input}
-                />
-                <button type="submit" className={styles.button}>
-                    🔍︎
-                </button>
+                <div className={styles.inputWrapper}>
+                    <input
+                        id="movieSearch"
+                        type="text"
+                        value={searchText}
+                        onChange={(e) => setSearchText(e.target.value)}
+                        placeholder="Find..."
+                        className={`search-input ${styles.input}`}
+                    />
+                    <button type="submit" className={`search-button ${styles.button}`}>
+                        🔍︎
+                    </button>
+                </div>
 
                 {queryInUrl && (
                     <button
                         type="button"
                         onClick={handleClear}
-                        className={styles.clearButton}
+                        className={`search-clearButton ${styles.clearButton}`}
                     >
                         Clear search
                     </button>

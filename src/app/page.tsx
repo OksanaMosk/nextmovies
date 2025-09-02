@@ -1,10 +1,17 @@
-export default function Home() {
-  return (
-      <div
-          className="flex flex-col justify-center items-center h-[calc(100vh-80px)] w-full text-[#3af0f0] bg-cover bg-center bg-no-repeat shadow-[0_0_10px_rgba(255,_255,_255,_0.8)]"
+import MostPopularMoviesGallery from "@/components/most-popular-gallery-component/MostPopularGalleryComponent";
+import MostPopularWrapper from "@/components/most-popular-wrapper/MostPopularWrapperComponent";
+import {IMovie} from "@/models/IMovie";
+import {getPopularMovies} from "@/services/movie_services/movies-servise";
 
-      >
-        <p className="text-4xl">Home Page</p>
-      </div>
-  )
-}
+
+    export default async function Home() {
+        const response = await getPopularMovies()
+        const top10: IMovie[] = response.results.filter((m) => m.poster_path).slice(0, 10);
+        return (
+            <div className="flex flex-col justify-center items-center h-[84%] w-full">
+                <MostPopularWrapper>
+                    <MostPopularMoviesGallery movies={top10} />
+                </MostPopularWrapper>
+            </div>
+        );
+    }

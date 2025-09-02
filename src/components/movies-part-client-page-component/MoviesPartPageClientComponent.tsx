@@ -1,7 +1,5 @@
 "use client"
 
-import type { IGenre } from "@/models/IGenre";
-import type { IMovie } from "@/models/IMovie";
 import { useRouter } from "next/navigation";
 import { SortComponent } from "@/components/sort-component/SortComponent";
 import { SearchComponent } from "@/components/search-component/SearchComponent";
@@ -10,6 +8,8 @@ import { MovieListComponent } from "@/components/movie-list-сomponent/MovieList
 import { ScrollTopButtonComponent } from "@/components/scroll-top-button-component/ScrollTopButtonComponent";
 import { updateSearchParams } from "@/utils/updateSearchParams";
 import styles from './MoviesPartPageClientComponent.module.css';
+import type { IGenre } from "@/models/IGenre";
+import type { IMovie } from "@/models/IMovie";
 
 type Props = {
     searchParams: {
@@ -57,7 +57,7 @@ export default function MoviesPartPageClientComponent({
         <div className={styles.container}>
             <SearchComponent />
             {!query.trim() && (
-                <div className={styles.sortBar}>
+                <div>
                     <SortComponent value={sort} onChangeAction={handleSortChange} />
                     <GenreComponent
                         value={genreId}

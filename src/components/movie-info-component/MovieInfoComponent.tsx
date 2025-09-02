@@ -14,8 +14,7 @@ type Props = {
 
 export const MovieInfoComponent= async ({id}:Props ) => {
     const movieItem: IMovieDetails = await getByIdMovie(id);
-    //
-    // window.scrollTo({ top: 0, behavior: "smooth" });
+
     const {
         adult,
         popularity,

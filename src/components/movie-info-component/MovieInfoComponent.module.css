@@ -1,7 +1,8 @@
 .container {
+    position: relative;
     max-width: 70vw;
     margin: 5rem auto;
-    background-color: var(--color-container);
+    background-color: black;
     color: var(--color-white);
     border-radius: 1.25rem;
     overflow: hidden;
@@ -42,26 +43,25 @@
     border-radius: 1.25rem;
 }
 .title {
-    color: var(--color-blue-main);
+    color: var(--color-active);
     font-weight: 700;
     font-size: 1.5rem;
     margin-bottom: 0.25rem;
 }
 .tagline {
     font-style: italic;
-    color: var(--color-login);
+    color: var(--color-active);
     margin-bottom: 0.75rem;
 }
 .details {
     font-size: 0.875rem;
-    color: var(--color-blue-main);
     margin-bottom: 1rem;
 }
 .details p {
     margin: 0.25rem 0;
 }
 .link {
-    color: var(--color-login);
+    color: var(--color-badgeId);
     text-decoration: underline;
 }
 .overview {
@@ -89,7 +89,7 @@
     gap: 0.5rem;
     font-size: 0.875rem;
     padding-bottom: 1rem;
-    border-bottom: 1px solid var(--color-login);
+    border-bottom: 1px solid var(--color-active);
 }
 .collectionSection {
     margin-top: 1rem;
@@ -102,8 +102,6 @@
     width: 500px;
     height: 300px;
     object-fit: cover;
-
-
 }
 .collectionNoPoster {
     width: 100%;
@@ -126,7 +124,7 @@
     gap: 2rem;
 }
 .twoColsTop{
-    border-bottom: 1px solid var(--color-login);
+    border-bottom: 1px solid var(--color-active);
 }
 .twoColsTop > :first-child,
 .twoColsBottom > :first-child {
@@ -141,7 +139,7 @@
     flex-direction: column;
 }
 .titlesParagraf {
-    color: var(--color-login);
+    color: var(--color-active);
     font-weight: 600;
     margin-bottom: 0.5rem;
 }
@@ -150,7 +148,7 @@
     list-style: none;
     padding: 0;
     margin: 0;
-    color: var(--color-blue-main);
+    color: var(--color-active);
     font-size: 0.875rem;
 }
 .productionItem {
@@ -161,7 +159,7 @@
 }
 .productionLogo {
     height: 1.5rem;
-    background-color: var(--color-blue-main);
+    background-color: var(--color-badgeId);
     padding: 0.25rem;
     border-radius: 0.25rem;
     min-width: 2.5rem;
@@ -179,7 +177,7 @@
     padding: 0.25rem 0.5rem;
     border-radius: 0.25rem;
     font-size: 0.75rem;
-    color: var(--color-blue-main);
+    color: var(--color-badgeId);
     font-weight: 600;
     display: inline-block;
     text-align: center;

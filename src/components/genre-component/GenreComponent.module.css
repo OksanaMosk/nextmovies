@@ -5,7 +5,7 @@
     width: 270px;
 }
 .label {
-    color: var(--color-blue-main);
+    color: var(--color-active);
     font-size: 1rem;
 }
 .select {
@@ -13,8 +13,8 @@
     align-items: center;
     padding: 0.6rem 1rem;
     border-radius: 1.5rem;
-    background-color: var(--color-blue-main);
-    color: var(--color-dark-text);
+    background-color: var(--color-active);
+    color: var(--color-noposter);
     font-size: 0.875rem;
     cursor: pointer;
     outline: none;

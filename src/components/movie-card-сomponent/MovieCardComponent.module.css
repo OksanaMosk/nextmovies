@@ -1,11 +1,11 @@
 .movieCardWrapper {
     position: relative;
-    width: 270px;
-    height: 540px;
+    width: 300px;
+    height: 500px;
     cursor: pointer;
-    border-radius: 8px;
+    border-radius: 2rem;
     overflow: hidden;
-    box-shadow: 0 0 5px 5px rgba(191, 219, 254, 0.5);
+    border: 1px solid #FFD700;
     transition: transform 0.2s ease-in-out;
 }
 .movieCardWrapper:hover {
@@ -13,34 +13,35 @@
 }
 .movieItem{
     position: relative;
-    border-radius: 8px 8px 0 0;
+    border-radius: 2rem 2rem 0 0;
     overflow: hidden;
-    box-shadow: 0 10px 20px rgba(191, 219, 254, 0.5);
+    box-shadow: 0 2px 10px rgba(255, 215, 0, 0.5);
 }
 
 .moviePoster {
     width: 100%;
     object-fit: cover;
     height: 400px;
-    border-radius: 8px 8px 0 0;
+    border-radius: 2rem 2rem 0 0;
 }
 .moviePosterPlaceholder {
     width: 100%;
     height: 400px;
-    background-color: var(--color-container);
+    background-color: black;
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 10px 20px rgba(191, 219, 254, 0.5);
+    box-shadow: 0 5px 10px rgba(191, 219, 254, 0.3);
 }
 .noImage{
     width: 100%;
-    opacity: 0.3;
+
 }
 .noImageText{
     position: absolute;
+    top: 1rem;
     color: var(--color-active);
-    font-size: 1rem;
+    font-size: 0.8rem;
 }
 .movieVideoOverlay{
     position: absolute;
@@ -49,7 +50,7 @@
     justify-content: center;
     align-items: center;
     z-index: 20;
-    border-radius: 0 8px 8px 0;
+    border-radius: 2rem 2rem 0 0;
     inset: 0;
 }
 .playButton {
@@ -63,54 +64,62 @@
 }
 .playButtonIcon{
     position: relative;
+    width: 80px;
+    height: 80px;
 
 }
 .movieInfoWrapper{
     display: flex;
     justify-content: space-between;
-    padding: 8px;
+    padding: 0.6rem 1rem;
     cursor: default;
-    background: inherit;
-    height: 140px;
-    border-radius:0 0 8px 8px;
+    background: black;
+    height: 100px;
+    border-radius:0 0 2rem 2rem;
 }
 .movieInfo {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 80%;
-    color: var(--color-blue-main);
-    font-size: 10px;
+    width: 100%;
+    color: var(--color-badgeId);
+    font-size: 0.6rem;
 }
 .movieTitle {
-    color: var(--color-border-indigo);
+    color: var(--color-active);
     font-weight: bold;
-    font-size: 14px;
-    width:100%;
+    font-size: 0.8rem;
+    width: 100%;
+    white-space: nowrap;
+    padding-right: 8px;
 }
 .movieGenres {
     width:100%;
     display: flex;
     flex-wrap: wrap;
-    gap: 5px;
+    gap: 3px;
 
 }
 .tag {
     border-radius: 9999px;
-    padding: 0.125rem 0.25rem;
-    color: var(--color-white);
-    font-size: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.25rem;
+    color: var(--color-container);
+    font-size: 0.6rem;
 }
 .disabled {
-    pointer-events: none !important;
+    pointer-events: none;
     background-color: var(--color-disabled);
     cursor: not-allowed;
-    opacity: 0.6;
+    opacity: 0.8;
+    color:var(--color-active);
 }
 .enabled {
     background-color:var(--color-badgeId);
     cursor: pointer;
 }
 .enabled:hover {
-    background-color: var(--color-border-indigo);
+    background-color: var(--color-border);
 }
