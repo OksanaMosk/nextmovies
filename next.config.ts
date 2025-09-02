@@ -1,20 +1,5 @@
-import path from 'path';
-import type { NextConfig } from 'next';
-import type { Configuration } from 'webpack';
-
-const webpackConfig = (config: Configuration): Configuration => {
-    config.resolve = config.resolve || {};
-    config.resolve.alias = {
-        ...(config.resolve.alias || {}),
-        '@components': path.resolve(__dirname, 'src/components'),
-        '@services': path.resolve(__dirname, 'src/services'),
-        '@models': path.resolve(__dirname, 'src/models'),
-        '@utils': path.resolve(__dirname, 'src/utils'),
-    };
-    return config;
-};
-
-const nextConfig: NextConfig = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
     images: {
         remotePatterns: [
             {
@@ -24,7 +9,6 @@ const nextConfig: NextConfig = {
             },
         ],
     },
-    webpack: webpackConfig,
 };
 
-export default nextConfig;
+module.exports = nextConfig;
